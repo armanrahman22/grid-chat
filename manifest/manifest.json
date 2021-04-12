@@ -1,0 +1,45 @@
+{
+	"$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+	"manifestVersion": "devPreview",
+	"id": "{{APPLICATION_ID}}",
+	"version": "{{VERSION}}",
+	"packageName": "{{PACKAGE_NAME}}",
+	"developer": {
+		"name": "cse_nyc",
+		"websiteUrl": "https://{{REACT_APP_HOSTNAME}}",
+		"privacyUrl": "https://{{REACT_APP_HOSTNAME}}/privacy.html",
+		"termsOfUseUrl": "https://{{REACT_APP_HOSTNAME}}/tou.html"
+	},
+	"name": {
+		"short": "Grid Chat App",
+		"full": "Grid Chat App"
+	},
+	"description": {
+		"short": "TODO: add short description here",
+		"full": "TODO: add full description here"
+	},
+	"icons": {
+		"outline": "icon-outline.png",
+		"color": "icon-color.png"
+	},
+	"accentColor": "#D85028",
+	"configurableTabs": [],
+	"staticTabs": [
+		{
+			"entityId": "feb206d6-4922-4ac2-893c-c4f6823170af",
+			"name": "Grid Chat Tab",
+			"contentUrl": "https://{{REACT_APP_HOSTNAME}}",
+			"scopes": ["personal"]
+		}
+	],
+	"bots": [],
+	"connectors": [],
+	"composeExtensions": [],
+	"permissions": ["identity", "messageTeamMembers"],
+	"validDomains": ["{{REACT_APP_HOSTNAME}}"],
+	"showLoadingIndicator": false,
+	"webApplicationInfo": {
+		"id": "{{REACT_APP_CLIENT_ID}}",
+		"resource": "api://{{REACT_APP_HOSTNAME}}/{{REACT_APP_CLIENT_ID}}"
+	}
+}
