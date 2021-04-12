@@ -32,3 +32,7 @@
 1. Run `gulp manifest` to create the teams app manifest zip file under `./manifest/package`. You will upload this in teams to install your app.
 
 1. Run `yarn run start` to start the server and client
+
+## Demo
+
+![Demo Gif](./images/demo.gif)
