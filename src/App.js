@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { useTeams } from "msteams-react-base-component"
 import * as microsoftTeams from "@microsoft/teams-js"
 import { Provider, themeNames } from "@fluentui/react-teams"
 
 import "./index.css"
 import Home from "./Home/Home"
 import ChatRoom from "./ChatRoom/ChatRoom"
-import { About } from "./about"
-import ConsentPopup from "./Auth/ConsentPopup"
-import ClosePopup from "./Auth/ClosePopup"
 import TeamsAuth from "./Auth/TeamsAuth"
 import { CacheService } from "@microsoft/mgt"
 CacheService.config.isEnabled = false
@@ -64,11 +60,8 @@ function App() {
 			<Router>
 				<Switch>
 					<Route exact path="/" component={Home} />
-					<Route exact path="/about" component={About} />
 					<Route exact path="/:chatId" component={ChatRoom} />
-					<Route exact path="/auth/auth-start" component={ConsentPopup} />
 					<Route exact path="/auth/teams" component={TeamsAuth} />
-					<Route exact path="/auth/auth-end" component={ClosePopup} />
 				</Switch>
 			</Router>
 		</Provider>
