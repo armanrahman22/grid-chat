@@ -21,7 +21,7 @@
 		"socket.io-client": "^4.0.0"
 	},
 	"nodemonConfig": {
-		"exec": "yarn dev:server",
+		"exec": "yarn dev",
 		"watch": [
 			"src/*"
 		],
@@ -32,13 +32,13 @@
 		]
 	},
 	"scripts": {
-		"clean:server": "rimraf dist",
-		"transpile:server": "babel src --out-dir dist",
-		"build:server": "npm-run-all clean:server transpile:server",
+		"clean": "rimraf dist",
+		"transpile": "babel src --out-dir dist",
+		"build": "npm-run-all clean transpile",
 		"server": "node ./dist/index.js",
-		"dev:server": "NODE_ENV=development npm-run-all build:server server",
-		"prod:server": "NODE_ENV=production npm-run-all build:server server",
-		"watch:server": "nodemon"
+		"dev": "NODE_ENV=development npm-run-all build server",
+		"prod": "NODE_ENV=production npm-run-all build server",
+		"watch": "nodemon"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.13.16",

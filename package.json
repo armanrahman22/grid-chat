@@ -2,39 +2,26 @@
 	"name": "teams-grid-project",
 	"version": "0.1.0",
 	"private": true,
-	"dependencies": {
-	},
+	"dependencies": {},
 	"scripts": {
-		"clean:server": "rimraf dist-server",
-		"transpile:server": "babel . --out-dir ../dist-server",
-		"build:server": "npm-run-all clean:server transpile:server",
-		"server": "node ../dist-server/index.js",
-		"dev:server": "NODE_ENV=development npm-run-all build:server server",
-		"prod:server": "NODE_ENV=production npm-run-all build:server server",
-		"watch:server": "nodemon",
 		"start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-		"client": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"client": "cd client && yarn start",
+		"server": "cd server && yarn watch"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.13.16",
-		"@babel/core": "^7.14.0",
-		"@babel/preset-env": "^7.14.1",
-		"@babel/preset-react": "^7.13.13",
 		"concurrently": "^6.0.0",
-		"del": "^6.0.0",
 		"eslint-config-prettier": "^8.1.0",
 		"eslint-plugin-prettier": "^3.3.1",
 		"gulp": "^4.0.2",
 		"gulp-token-replace": "^1.1.5",
 		"gulp-zip": "^5.1.0",
-		"nodemon": "^2.0.7",
 		"npm-run-all": "^4.1.5",
-		"parcel-bundler": "^1.12.5",
 		"prettier": "2.2.1",
 		"vinyl": "^2.2.1",
 		"yargs": "^16.2.0"
-	}
+	},
+	"workspaces": [
+		"client",
+		"server"
+	]
 }

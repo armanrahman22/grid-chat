@@ -29,16 +29,14 @@
 		"socket.io-client": "^4.0.0"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"start": "parcel ./src/index.html --port 3000 --no-source-maps"
 	},
 	"devDependencies": {
 		"@babel/preset-env": "^7.14.1",
 		"@babel/preset-react": "^7.13.13",
 		"del": "^6.0.0",
-		"npm-run-all": "^4.1.5"
+		"npm-run-all": "^4.1.5",
+		"parcel-bundler": "^1.12.5"
 	},
 	"browserslist": [
 		"defaults",

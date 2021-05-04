@@ -63,19 +63,19 @@ const useChat = (chatId) => {
 					setMessages((messages) => [...messages, ...chatMessages])
 					setLoadedMessages(true)
 
-					// Set Subscription
-					const subscription = {
-						changeType: "created",
-						notificationUrl:
-							"EventHub:https://arrahm-blk-poc-kv.vault.azure.net/secrets/event-hub-connection-string?tenantId=microsoft.onmicrosoft.com",
-						resource: `chats/${chatId}/messages`,
-						expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
-					}
+					// // Set Subscription
+					// const subscription = {
+					// 	changeType: "created",
+					// 	notificationUrl:
+					// 		"EventHub:https://arrahm-blk-poc-kv.vault.azure.net/secrets/event-hub-connection-string?tenantId=microsoft.onmicrosoft.com",
+					// 	resource: `chats/${chatId}/messages`,
+					// 	expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
+					// }
 
-					await graphClient
-						.api("/subscriptions")
-						.version("beta")
-						.post(subscription)
+					// await graphClient
+					// 	.api("/subscriptions")
+					// 	.version("beta")
+					// 	.post(subscription)
 				}
 			}
 			getMessages()
