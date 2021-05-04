@@ -29,12 +29,16 @@
 		"socket.io-client": "^4.0.0"
 	},
 	"scripts": {
-		"start": "parcel ./src/index.html --port 3000 --no-source-maps"
+		"clean": "rimraf dist",
+		"transpile": "parcel build ./src/index.html --no-source-maps",
+		"build": "npm-run-all clean transpile",
+		"prod": "NODE_ENV=production yarn build",
+		"watch": "NODE_ENV=development parcel ./src/index.html --port 3000 --no-source-maps"
 	},
 	"devDependencies": {
 		"@babel/preset-env": "^7.14.1",
 		"@babel/preset-react": "^7.13.13",
-		"del": "^6.0.0",
+		"rimraf": "^3.0.2",
 		"npm-run-all": "^4.1.5",
 		"parcel-bundler": "^1.12.5"
 	},
