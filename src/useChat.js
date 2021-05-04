@@ -1,4 +1,7 @@
 import { Providers, ProviderState } from "@microsoft/mgt"
+import { EventHubConsumerClient } from "@azure/event-hubs"
+import { ContainerClient } from "@azure/storage-blob"
+import { BlobCheckpointStore } from "@azure/eventhubs-checkpointstore-blob"
 import { useEffect, useRef, useState } from "react"
 import socketIOClient from "socket.io-client"
 
@@ -59,6 +62,20 @@ const useChat = (chatId) => {
 					console.log("chatMessages", chatMessages)
 					setMessages((messages) => [...messages, ...chatMessages])
 					setLoadedMessages(true)
+
+					// Set Subscription
+					const subscription = {
+						changeType: "created",
+						notificationUrl:
+							"EventHub:https://arrahm-blk-poc-kv.vault.azure.net/secrets/event-hub-connection-string?tenantId=microsoft.onmicrosoft.com",
+						resource: `chats/${chatId}/messages`,
+						expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
+					}
+
+					await graphClient
+						.api("/subscriptions")
+						.version("beta")
+						.post(subscription)
 				}
 			}
 			getMessages()

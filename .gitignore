@@ -10,6 +10,7 @@ node_modules
 
 # production
 /build
+dist
 
 # misc
 .DS_Store
@@ -24,3 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 
 manifest/package/*.zip
+
+.cache

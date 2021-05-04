@@ -3,6 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@azure/event-hubs": "^5.5.1",
+		"@azure/eventhubs-checkpointstore-blob": "^1.0.1",
+		"@azure/storage-blob": "^12.5.0",
 		"@fluentui/react-northstar": "~0.52.0",
 		"@fluentui/react-teams": "^3.0.0",
 		"@microsoft/mgt": "^2.1.0",
@@ -30,26 +33,20 @@
 		"socket.io-client": "^4.0.0"
 	},
 	"scripts": {
+		"build:server": "rimraf dist-server && babel ./server --out-dir dist-server",
+		"dev:server": "NODE_ENV=development yarn build:server && nodemon ./dist-server/index.js",
 		"start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
 		"client": "react-scripts start",
-		"server": "nodemon ./server/index.js ",
+		"server": "parcel ./server/index.js --target node --port 3007",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
 	"devDependencies": {
+		"@babel/cli": "^7.13.16",
+		"@babel/core": "^7.14.0",
+		"@babel/preset-env": "^7.14.1",
+		"@babel/preset-react": "^7.13.13",
 		"concurrently": "^6.0.0",
 		"del": "^6.0.0",
 		"eslint-config-prettier": "^8.1.0",
@@ -58,9 +55,15 @@
 		"gulp-token-replace": "^1.1.5",
 		"gulp-zip": "^5.1.0",
 		"nodemon": "^2.0.7",
+		"parcel-bundler": "^1.12.5",
 		"prettier": "2.2.1",
 		"vinyl": "^2.2.1",
 		"yargs": "^16.2.0"
 	},
+	"browserslist": [
+		"defaults",
+		"not IE 11",
+		"maintained node versions"
+	],
 	"proxy": "http://localhost:3007"
 }
