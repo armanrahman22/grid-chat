@@ -1,9 +1,5 @@
-const express = require("express")
-const { ioServer } = require("../helpers/socketHelper")
-const {
-	EventHubConsumerClient,
-	earliestEventPosition,
-} = require("@azure/event-hubs")
+import express from "express"
+import { ioServer } from "../helpers/socketHelper"
 
 export const listenRouter = express.Router()
 

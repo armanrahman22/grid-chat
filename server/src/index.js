@@ -1,19 +1,21 @@
-const express = require("express")
-const socket_io = require("socket.io")
-const http = require("http")
+import express from "express"
+import socket_io from "socket.io"
+import http from "http"
+import dotenv from "dotenv"
+
+dotenv.config()
+const port = 3007
+const message_event = process.env.NEW_CHAT_MESSAGE_EVENT || "newChatMessage"
 
 const app = express()
-const socketServer = http.Server(app)
-export const ioServer = socket_io(socketServer, {
+const server = http.Server(app)
+const io = socket_io(server, {
 	cors: {
 		origin: "*",
 	},
 })
 
-socketServer.listen(3001)
-
-// Socket Event
-ioServer.on("connection", (socket) => {
+io.on("connection", (socket) => {
 	console.log(`Client ${socket.id} connected`)
 
 	// Join a conversation
@@ -30,4 +32,8 @@ ioServer.on("connection", (socket) => {
 		console.log(`Client ${socket.id} diconnected`)
 		socket.leave(chatId)
 	})
+})
+
+server.listen(port, () => {
+	console.log(`Listening on port ${port}`)
 })

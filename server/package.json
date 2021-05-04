@@ -1,0 +1,53 @@
+{
+	"name": "grid-chat-server",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"@azure/event-hubs": "^5.5.1",
+		"@azure/eventhubs-checkpointstore-blob": "^1.0.1",
+		"@azure/storage-blob": "^12.5.0",
+		"@microsoft/microsoft-graph-client": "^2.2.1",
+		"@microsoft/teams-js": "^1.9.0",
+		"axios": "^0.21.1",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-promise-router": "^4.1.0",
+		"express-session": "^1.17.1",
+		"express-validator": "^6.10.0",
+		"isomorphic-fetch": "^3.0.0",
+		"jwt-decode": "^3.1.2",
+		"node-fetch": "^2.6.1",
+		"socket.io": "^4.0.0",
+		"socket.io-client": "^4.0.0"
+	},
+	"nodemonConfig": {
+		"exec": "yarn dev:server",
+		"watch": [
+			"src/*"
+		],
+		"ignore": [
+			"**/__tests__/**",
+			"*.test.js",
+			"*.spec.js"
+		]
+	},
+	"scripts": {
+		"clean:server": "rimraf dist",
+		"transpile:server": "babel src --out-dir dist",
+		"build:server": "npm-run-all clean:server transpile:server",
+		"server": "node ./dist/index.js",
+		"dev:server": "NODE_ENV=development npm-run-all build:server server",
+		"prod:server": "NODE_ENV=production npm-run-all build:server server",
+		"watch:server": "nodemon"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.13.16",
+		"@babel/core": "^7.14.0",
+		"@babel/preset-env": "^7.14.1",
+		"@babel/preset-react": "^7.13.13",
+		"concurrently": "^6.0.0",
+		"del": "^6.0.0",
+		"nodemon": "^2.0.7",
+		"npm-run-all": "^4.1.5"
+	}
+}
