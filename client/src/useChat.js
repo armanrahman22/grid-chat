@@ -1,7 +1,4 @@
 import { Providers, ProviderState } from "@microsoft/mgt"
-import { EventHubConsumerClient } from "@azure/event-hubs"
-import { ContainerClient } from "@azure/storage-blob"
-import { BlobCheckpointStore } from "@azure/eventhubs-checkpointstore-blob"
 import { useEffect, useRef, useState } from "react"
 import socketIOClient from "socket.io-client"
 
@@ -63,19 +60,22 @@ const useChat = (chatId) => {
 					setMessages((messages) => [...messages, ...chatMessages])
 					setLoadedMessages(true)
 
-					// // Set Subscription
-					// const subscription = {
-					// 	changeType: "created",
-					// 	notificationUrl:
-					// 		"EventHub:https://arrahm-blk-poc-kv.vault.azure.net/secrets/event-hub-connection-string?tenantId=microsoft.onmicrosoft.com",
-					// 	resource: `chats/${chatId}/messages`,
-					// 	expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
-					// }
+					// Set Subscription
+					const subscription = {
+						changeType: "created",
+						notificationUrl:
+							"EventHub:https://arrahm-blk-poc-kv.vault.azure.net/secrets/event-hub-connection-string?tenantId=microsoft.onmicrosoft.com",
+						resource: `chats/${chatId}/messages`,
+						expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
+					}
 
-					// await graphClient
-					// 	.api("/subscriptions")
-					// 	.version("beta")
-					// 	.post(subscription)
+					await graphClient
+						.api("/subscriptions")
+						.version("beta")
+						.post(subscription)
+						.catch((error) => {
+							console.log(error)
+						})
 				}
 			}
 			getMessages()
@@ -83,7 +83,8 @@ const useChat = (chatId) => {
 	}, [isSignedIn, chatId, loadedMessages])
 
 	useEffect(() => {
-		socketRef.current = socketIOClient(window.location.origin, {
+		console.log(`web proxy: ${process.env.REACT_APP_SERVER}`)
+		socketRef.current = socketIOClient(process.env.REACT_APP_SERVER, {
 			query: { chatId },
 		})
 
@@ -102,6 +103,8 @@ const useChat = (chatId) => {
 	}, [chatId])
 
 	const sendMessage = async (messageBody) => {
+		console.log(`sending message to: `, socketRef)
+		console.log(`senderId: ${socketRef.current.id}`)
 		socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
 			body: messageBody,
 			senderId: socketRef.current.id,

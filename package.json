@@ -5,7 +5,7 @@
 	"dependencies": {},
 	"scripts": {
 		"start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-		"client": "cd client && yarn start",
+		"client": "cd client && yarn watch",
 		"server": "cd server && yarn watch"
 	},
 	"devDependencies": {

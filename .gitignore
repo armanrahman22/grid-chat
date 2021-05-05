@@ -27,3 +27,5 @@ yarn-error.log*
 manifest/package/*.zip
 
 .cache
+.parcel-cache
+parcel-bundle-reports
